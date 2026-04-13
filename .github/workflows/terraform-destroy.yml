@@ -1,4 +1,4 @@
-name: Terraform Infra Destroy
+name: Terraform Infra REMOVE
 
 on:
   workflow_dispatch:
