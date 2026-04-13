@@ -25,11 +25,6 @@ env:
   TF_VERSION: '1.14.0'
   TF_WORKING_DIR: './infra'
   TF_VAR_FILE: 'environment/dev/terraform.tfvars'
-  ARM_USE_OIDC: true
-  ARM_USE_AZUREAD: true
-  ARM_CLIENT_ID: ${{ secrets.AZUREAPPSERVICE_CLIENTID_E061B3BE4A9E4D17844BDBBE414D1813 }}
-  ARM_TENANT_ID: ${{ secrets.AZUREAPPSERVICE_TENANTID_8AFD40476860464998EB9FEC8BCB36D9 }}
-  ARM_SUBSCRIPTION_ID: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4ECC95F8F1D74F33BB41428708879A00 }}
 
 jobs:
   plan:
@@ -58,7 +53,7 @@ jobs:
         run: terraform fmt -check -recursive
 
       - name: Terraform init
-        run: terraform init -input=false
+        run: terraform init -input=false -reconfigure
 
       - name: Terraform validate
         run: terraform validate
@@ -99,7 +94,7 @@ jobs:
           terraform_version: ${{ env.TF_VERSION }}
 
       - name: Terraform init
-        run: terraform init -input=false
+        run: terraform init -input=false -reconfigure
 
       - name: Download Terraform plan artifact
         uses: actions/download-artifact@v4
