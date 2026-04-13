@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# This script sets up the backend infrastructure for the project.
+storage_account_name="tfbackendstoragemg"
+resource_group_name="rg-tf-backend"
+container_name="day18-backend-container"
+
+# Create a container in the storage account
+az storage container create --name $container_name --account-name $storage_account_name
+
+echo "Backend infrastructure setup complete."
