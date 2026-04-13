@@ -23,7 +23,7 @@ concurrency:
 
 env:
   TF_VERSION: "1.14.0"
-  TF_WORKING_DIR: "./infra"
+  TF_WORKING_DIR: "infra"
 
 jobs:
   destroy:
