@@ -43,6 +43,7 @@ jobs:
         with:
           name: python-app
           path: ./qr-app
+          include-hidden-files: true
 
   deploy:
     runs-on: ubuntu-latest
@@ -63,6 +64,8 @@ jobs:
           test -f ./qr-app/host.json
           test -f ./qr-app/function_app.py
           test -f ./qr-app/requirements.txt
+          test -d ./qr-app/.python_packages/lib/site-packages
+          test -d ./qr-app/.python_packages/lib/site-packages/qrcode
         
       - name: Login to Azure
         uses: azure/login@v2
