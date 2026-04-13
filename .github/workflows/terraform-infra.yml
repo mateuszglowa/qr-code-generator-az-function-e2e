@@ -49,7 +49,6 @@ jobs:
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.SPN_CLIENTID }}
-          secret: ${{ secrets.SPN_SECRET }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8AFD40476860464998EB9FEC8BCB36D9 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4ECC95F8F1D74F33BB41428708879A00 }}
 
@@ -97,7 +96,6 @@ jobs:
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.SPN_CLIENTID }}
-          secret: ${{ secrets.SPN_SECRET }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8AFD40476860464998EB9FEC8BCB36D9 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4ECC95F8F1D74F33BB41428708879A00 }}
 
