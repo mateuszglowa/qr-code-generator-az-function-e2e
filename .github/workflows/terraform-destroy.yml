@@ -36,15 +36,15 @@ jobs:
         working-directory: ${{ env.TF_WORKING_DIR }}
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Require explicit confirmation
         run: |
           if [[ "${{ github.event.inputs.confirm_destroy }}" != "DESTROY" ]]; then
             echo "Confirmation mismatch. Set confirm_destroy to DESTROY to proceed."
             exit 1
           fi
-
-      - name: Checkout repository
-        uses: actions/checkout@v4
 
       - name: Azure login
         uses: azure/login@v3
