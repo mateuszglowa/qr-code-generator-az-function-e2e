@@ -14,7 +14,7 @@ on:
 
 env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: './qr-app' # set this to the path to your web app project, defaults to the repository root
-  PYTHON_VERSION: '3.13' # set this to the python version to use (supports 3.6, 3.7, 3.8)
+  PYTHON_VERSION: '3.13'
 
 jobs:
   build:
@@ -31,26 +31,18 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Create and start virtual environment
+      - name: Install dependencies into Function package
         run: |
-          python -m venv venv
-          source venv/bin/activate
-
-      - name: Install dependencies
-        run: pip install -r ./qr-app/requirements.txt
+          python -m pip install --upgrade pip
+          python -m pip install -r ./qr-app/requirements.txt --target "./qr-app/.python_packages/lib/site-packages"
 
       # Optional: Add step to run tests here
-
-      - name: Zip artifact for deployment
-        run: zip release.zip ./qr-app -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: |
-            release.zip
-            !venv/
+          path: ./qr-app
 
   deploy:
     runs-on: ubuntu-latest
@@ -64,11 +56,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: python-app
-
-      - name: Unzip artifact for deployment
-        run: |
-          unzip release.zip
-          rm release.zip
         
       - name: Login to Azure
         uses: azure/login@v2
