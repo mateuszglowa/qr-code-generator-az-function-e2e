@@ -31,7 +31,8 @@ function_app_name   = "funcapp-dev-qrcode"
 
 # App Service application settings
 app_service_app_settings = {
-  key = "string"
+  QR_CODE_CONTAINER_NAME   = "funcapp-qrcode-container"
+  QR_CODE_SAS_EXPIRY_MINUTES = "15"
 }
 
 # Function runtime (python, dotnet, node, etc.)

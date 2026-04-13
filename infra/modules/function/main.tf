@@ -33,6 +33,7 @@ resource "azurerm_function_app_flex_consumption" "this" {
   storage_container_endpoint         = "https://${var.storage_account.name}.blob.core.windows.net/${var.storage_account.container_name}"
   # storage_container_endpoint         = "https://sargdevday17b5c0.blob.core.windows.net/app-package-tralaltest-e841da9"
   storage_container_type             = "blobContainer"
+  app_settings                       = var.app_settings
   tags = var.tags
   site_config {
     cors {
