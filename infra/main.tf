@@ -34,7 +34,7 @@ module "function_app" {
 
   app_settings = {
     for key, value in merge(
-      var.app_service_app_settings, 
+      var.app_service_app_settings,
       {
         "AzureWebJobsStorage"        = module.storage_account.primary_connection_string
         "QR_CODE_CONTAINER_NAME"     = var.function_storage_container_name
