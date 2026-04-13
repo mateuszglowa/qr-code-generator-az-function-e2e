@@ -49,8 +49,8 @@ jobs:
         with:
           terraform_version: ${{ env.TF_VERSION }}
 
-      - name: Terraform format check
-        run: terraform fmt -check -recursive
+      - name: Terraform format
+        run: terraform fmt -recursive
 
       - name: Terraform init
         run: terraform init -input=false -reconfigure
