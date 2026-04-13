@@ -48,10 +48,7 @@ jobs:
       - name: Azure login
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.SPN_CLIENTID }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8AFD40476860464998EB9FEC8BCB36D9 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4ECC95F8F1D74F33BB41428708879A00 }}
-
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
@@ -93,12 +90,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Azure login
-        uses: azure/login@v2
+        uses: azure/login@v3
         with:
-          client-id: ${{ secrets.SPN_CLIENTID }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8AFD40476860464998EB9FEC8BCB36D9 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4ECC95F8F1D74F33BB41428708879A00 }}
-
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
