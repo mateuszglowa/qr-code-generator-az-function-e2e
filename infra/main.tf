@@ -37,7 +37,6 @@ module "function_app" {
       var.app_service_app_settings,
       {
         "AzureWebJobsStorage"        = module.storage_account.primary_connection_string
-        "FUNCTIONS_WORKER_RUNTIME"   = var.function_app_worker_runtime
         "QR_CODE_CONTAINER_NAME"     = var.function_storage_container_name
         "QR_CODE_SAS_EXPIRY_MINUTES" = "15"
       }
