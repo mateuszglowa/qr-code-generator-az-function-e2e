@@ -1,0 +1,66 @@
+name: Terraform Infra Destroy
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_destroy:
+        description: "Type DESTROY to continue"
+        required: true
+        type: string
+      tf_var_file:
+        description: "Terraform var-file path, relative to infra/"
+        required: true
+        default: "environment/dev/terraform.tfvars"
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: terraform-destroy-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  TF_VERSION: "1.14.0"
+  TF_WORKING_DIR: "./infra"
+
+jobs:
+  destroy:
+    name: Terraform Destroy
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ env.TF_WORKING_DIR }}
+
+    steps:
+      - name: Require explicit confirmation
+        run: |
+          if [[ "${{ github.event.inputs.confirm_destroy }}" != "DESTROY" ]]; then
+            echo "Confirmation mismatch. Set confirm_destroy to DESTROY to proceed."
+            exit 1
+          fi
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Azure login
+        uses: azure/login@v3
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Terraform init
+        run: terraform init -input=false -reconfigure
+
+      - name: Terraform plan destroy
+        run: terraform plan -destroy -input=false -out=tfdestroyplan -var-file=${{ github.event.inputs.tf_var_file }}
+
+      - name: Terraform apply destroy plan
+        run: terraform apply -input=false -auto-approve tfdestroyplan
