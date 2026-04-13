@@ -78,7 +78,7 @@ def _generate_blob_sas_url(
         permission=BlobSasPermissions(read=True),
         expiry=datetime.now(UTC) + timedelta(minutes=expiry_minutes),
     )
-    return f"{blob_service_client.primary_endpoint}/{container_name}/{blob_name}?{sas_token}"
+    return f"{blob_service_client.primary_endpoint}{container_name}/{blob_name}?{sas_token}"
 
 
 @app.route(route="http_trigger")
