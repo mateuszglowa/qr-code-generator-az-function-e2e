@@ -45,3 +45,10 @@ module "function_app" {
   tags                = local.common_tags
 }
 
+module "identity" {
+  source = "./modules/identity"
+
+  name                = "${var.environment}-identity-${var.suffix}"
+  resource_group_name = module.resource_group.name
+  location            = var.location
+}
