@@ -2,7 +2,7 @@
 module "resource_group" {
   source = "./modules/resource-group"
 
-  name  = var.resource_group_name
+  name     = var.resource_group_name
   location = var.location
   tags     = local.common_tags
 }
@@ -36,10 +36,10 @@ module "function_app" {
     for key, value in merge(
       var.app_service_app_settings,
       {
-        "AzureWebJobsStorage"         = module.storage_account.primary_connection_string
-        "FUNCTIONS_WORKER_RUNTIME"    = var.function_app_worker_runtime
-        "QR_CODE_CONTAINER_NAME"      = var.function_storage_container_name
-        "QR_CODE_SAS_EXPIRY_MINUTES"  = "15"
+        "AzureWebJobsStorage"        = module.storage_account.primary_connection_string
+        "FUNCTIONS_WORKER_RUNTIME"   = var.function_app_worker_runtime
+        "QR_CODE_CONTAINER_NAME"     = var.function_storage_container_name
+        "QR_CODE_SAS_EXPIRY_MINUTES" = "15"
       }
     ) : key => value
   }
@@ -49,7 +49,7 @@ module "function_app" {
     container_name     = var.function_storage_container_name
     primary_access_key = module.storage_account.primary_access_key
   }
-  tags                = local.common_tags
+  tags = local.common_tags
 }
 
 module "identity" {

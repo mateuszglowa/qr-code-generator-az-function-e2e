@@ -11,7 +11,7 @@ terraform {
   }
   required_version = "=1.14.0"
 }
- 
+
 provider "azurerm" {
   features {
     resource_group {

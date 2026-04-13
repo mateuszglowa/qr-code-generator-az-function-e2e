@@ -1,8 +1,8 @@
 locals {
   common_tags = {
-    owner      = "matglo"
-    managed_by = "matglo"
-    department = "startup"
+    owner       = "matglo"
+    managed_by  = "matglo"
+    department  = "startup"
     environment = var.environment
   }
 }

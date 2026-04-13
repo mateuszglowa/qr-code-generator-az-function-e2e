@@ -17,7 +17,7 @@ tenant_id       = "4ce7bca3-7d98-4d2d-afb5-a9bbc223460e"
 resource_group_name = "rg-dev-qrcode"
 
 # Name used for monitoring resources (Log Analytics / App Insights)
-monitoring_name     = "qrcode-monx"
+monitoring_name = "qrcode-monx"
 
 # App Service resource naming
 app_service_name      = "webapp-dev-qrcode"
@@ -27,11 +27,11 @@ app_service_plan_name = "asp-dev-qrcode"
 storage_account_name = "stdevqrcodesa"
 
 # Function App naming
-function_app_name   = "funcapp-dev-qrcode"
+function_app_name = "funcapp-dev-qrcode"
 
 # App Service application settings
 app_service_app_settings = {
-  QR_CODE_CONTAINER_NAME   = "funcapp-qrcode-container"
+  QR_CODE_CONTAINER_NAME     = "funcapp-qrcode-container"
   QR_CODE_SAS_EXPIRY_MINUTES = "15"
 }
 
